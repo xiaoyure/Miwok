@@ -1,0 +1,27 @@
+TASK com.example.android.miwok id=1699
+  ACTIVITY com.example.android.miwok/.MainActivity 17283759 pid=23480
+    Local FragmentActivity 16b3ff96 State:
+      mCreated=truemResumed=false mStopped=true mReallyStopped=true
+      mLoadersStarted=true
+    FragmentManager misc state:
+      mHost=android.support.v4.app.FragmentActivity$HostCallbacks@145c2704
+      mContainer=android.support.v4.app.FragmentActivity$HostCallbacks@145c2704
+      mCurState=2 mStateSaved=true mDestroyed=false
+    View Hierarchy:
+      com.android.internal.policy.impl.PhoneWindow$DecorView{233eb755 V.E..... ... 0,0-1080,1920}
+        android.widget.LinearLayout{1c8073d1 V.E..... ... 0,0-1080,1920}
+          android.view.ViewStub{2aa12e36 G.E..... ... 0,0-0,0 #1020375}
+          android.widget.FrameLayout{36795137 V.E..... ... 0,75-1080,1920}
+            android.support.v7.widget.ActionBarOverlayLayout{1fc647c8 V.E..... ... 0,0-1080,1845 #7f0c0058 app:id/decor_content_parent}
+              android.support.v7.widget.ContentFrameLayout{1fedd786 V.E..... ... 0,168-1080,1845 #1020002 android:id/content}
+                android.widget.LinearLayout{18fccc09 V.E..... ... 0,0-1080,1677}
+                  android.support.v7.widget.AppCompatTextView{15fb302f V.ED..C. ... 0,0-1080,264 #7f0c006b app:id/numbers}
+                  android.support.v7.widget.AppCompatTextView{2ff2bd1a V.ED..C. ... 0,264-1080,528 #7f0c006c app:id/family}
+                  android.support.v7.widget.AppCompatTextView{3c14a04b V.ED..C. ... 0,528-1080,792 #7f0c006d app:id/colors}
+                  android.support.v7.widget.AppCompatTextView{22a14a28 V.ED..C. ... 0,792-1080,1056 #7f0c006e app:id/phrases}
+              android.support.v7.widget.ActionBarContainer{793c847 V.ED.... ... 0,0-1080,168 #7f0c0059 app:id/action_bar_container}
+                android.support.v7.widget.Toolbar{2edc1874 V.E..... ... 0,0-1080,168 #7f0c005a app:id/action_bar}
+                  android.widget.TextView{2a49f7c2 V.ED.... ... 48,43-224,124}
+                  android.support.v7.widget.ActionMenuView{b0af627 V.E..... ... 1080,0-1080,168}
+                android.support.v7.widget.ActionBarContextView{3bf10a99 G.E..... ... 0,0-0,0 #7f0c005b app:id/action_context_bar}
+        android.view.View{bef90e6 V.ED.... ... 0,0-1080,79 #102002f android:id/statusBarBackground}
