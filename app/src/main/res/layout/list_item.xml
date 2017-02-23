@@ -10,7 +10,8 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="@dimen/list_item_height"
-        android:layout_height="@dimen/list_item_height" />
+        android:layout_height="@dimen/list_item_height"
+        tools:src="@drawable/family_father"/>
 
     <LinearLayout
         android:id="@+id/text_container"
@@ -18,6 +19,7 @@
         android:layout_height="@dimen/list_item_height"
         android:orientation="vertical"
         android:gravity="center_vertical"
+        tools:background="@color/category_numbers"
         android:paddingLeft="16dp">
 
         <TextView
@@ -37,7 +39,5 @@
             android:textColor="#FFFFFF"
             tools:text="one"/>
     </LinearLayout>
-
-
 
 </LinearLayout>
