@@ -18,6 +18,7 @@ public class Word {
         mMiwokTranslation = MiwokTranslation;
         mAudioResourceID = AudioResourceID;
     }
+
     //构造函数
     public Word(String DefaultTranslation, String MiwokTranslation, int ImageResourceID, int AudioResourceID) {
         mDefaultTranslation = DefaultTranslation;
