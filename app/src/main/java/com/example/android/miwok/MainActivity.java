@@ -15,61 +15,35 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
-        TextView numbers = (TextView)findViewById(R.id.numbers);
-        numbers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
+        // 找到允许在两个fragments间滑动的view pager
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        TextView family = (TextView) findViewById(R.id.family);
-        family.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link FamilyActivity}
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-                // Start the new activity
-                startActivity(familyIntent);
-            }
-        });
+        // 创建一个adapter，了解滑动的每页是什么内容
+        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
-        TextView colors = (TextView) findViewById(R.id.colors);
-        colors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link ColorsActivity}
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-                // Start the new activity
-                startActivity(colorsIntent);
-            }
-        });
+        // 找到 tab layout 显示 tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        TextView phrases = (TextView) findViewById(R.id.phrases);
-        phrases.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link PhrasesActivity}
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-                // Start the new activity
-                startActivity(phrasesIntent);
-            }
-        });
+        // 用view pager 链接tab layout，然后：
+        //   1. 当 viewpager滑动时，更新tab layout
+        //   2. 当 tab 被选择时，更新view pager
+        //   3. 用view pager's adapter's titles设置tab layout的tab名字
+        //      by calling onPageTitle()
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
 }
