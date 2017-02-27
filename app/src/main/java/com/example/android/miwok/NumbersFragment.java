@@ -1,28 +1,38 @@
 package com.example.android.miwok;
 
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class NumbersActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class NumbersFragment extends Fragment {
+
+    public NumbersFragment() {
+        // Required empty public constructor
+    }
 
     private MediaPlayer mMediaPlayer; //定义音频
     private AudioManager mAudioManager;  //神奇的应用啊
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.word_list, container, false);
 
         //当有更重要的声音(如电话声)需要播放，定义当前声音的状态的一些操作
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         //为该数组赋值，储存内容
         final ArrayList<Word> words = new ArrayList<Word>();
@@ -37,8 +47,8 @@ public class NumbersActivity extends AppCompatActivity {
         words.add(new Word("nine", "wo'e", R.drawable.number_nine, R.raw.number_nine));
         words.add(new Word("ten", "na'aacha", R.drawable.number_ten, R.raw.number_ten));
 
-        WordAdapter adapter = new WordAdapter(this, words, R.color.category_numbers);
-        ListView listView = (ListView) findViewById(R.id.list);
+        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
+        ListView listView = (ListView) rootView.findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         //音频播放的触摸接口控制
@@ -55,7 +65,7 @@ public class NumbersActivity extends AppCompatActivity {
                 //AUDIOFOCUS_REQUEST_GRANTED申请成功
                 //AUDIOFOCUS_REQUEST_FAILED申请失败
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-                    mMediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getmAudioResourceID());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getmAudioResourceID());
                     mMediaPlayer.start();
                     //释放无用音频占用的空间
                     mMediaPlayer.setOnCompletionListener(mCompletionListener);
@@ -63,14 +73,8 @@ public class NumbersActivity extends AppCompatActivity {
             }
         });
 
+        return rootView;
     }
-
-    //不用时，释放掉音频占用的资源
-    private MediaPlayer.OnCompletionListener mCompletionListener = new  MediaPlayer.OnCompletionListener() {
-        public void onCompletion(MediaPlayer mediaPlayer){
-            releaseMediaPlayer();
-        }
-    };
 
     //定义AudioFocus被强占、再次获得通知
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
@@ -93,11 +97,12 @@ public class NumbersActivity extends AppCompatActivity {
         }
     };
 
-    @Override //退出该界面时，停止播放音频
-    protected void onStop() {
-        super.onStop();
-        releaseMediaPlayer();
-    }
+    //不用时，释放掉音频占用的资源
+    private MediaPlayer.OnCompletionListener mCompletionListener = new  MediaPlayer.OnCompletionListener() {
+        public void onCompletion(MediaPlayer mediaPlayer){
+            releaseMediaPlayer();
+        }
+    };
 
     //释放音频占用的空间
     private void releaseMediaPlayer() {
@@ -107,6 +112,5 @@ public class NumbersActivity extends AppCompatActivity {
             mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
-
 
 }
